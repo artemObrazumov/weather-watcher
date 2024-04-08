@@ -21,3 +21,8 @@ dependencyResolutionManagement {
 
 rootProject.name = "Weather watcher"
 include(":app")
+include(":common:navigation")
+include(":common:ui")
+include(":feature:main:domain")
+include(":feature:main:data")
+include(":feature:main:presentation")
