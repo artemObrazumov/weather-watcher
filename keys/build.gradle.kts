@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.weather.domain"
+    namespace = "com.weatherwatcher.keys"
     compileSdk = 34
 
     defaultConfig {
@@ -34,7 +34,10 @@ android {
 
 dependencies {
 
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
     testImplementation(libs.junit)
-    testImplementation(libs.coroutines.test)
-    testImplementation(libs.mockk)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 }

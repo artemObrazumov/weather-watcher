@@ -10,7 +10,7 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Assert
 import org.junit.Test
 
-class ExampleUnitTest {
+class GetWeatherUseCaseTest {
 
     @Test
     fun `should return failure result`() = runTest {
@@ -32,8 +32,20 @@ class ExampleUnitTest {
         val mockWeatherRepository = mockk<WeatherRepository>()
         val getWeatherUseCase = GetWeatherUseCase(mockWeatherRepository)
         val expectedWeatherResult = Weather(
-            temperature = 15,
-            city = "Moscow"
+            temperature = 0,
+            temperatureFeels = -5,
+            temperatureMin = -10,
+            temperatureMax = 5,
+            pressure = 100,
+            humidity = 101,
+            pressureSeaLevel = 105,
+            pressureGroundLevel = 110,
+            windSpeed = 3.5,
+            windDirectionDegrees = 90,
+            windGust = 2.5,
+            clouds = 6,
+            visibility = 5000,
+            city = "city"
         )
 
         coEvery {
