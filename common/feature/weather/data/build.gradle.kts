@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.kotlinSerializationLibrary)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -38,6 +39,9 @@ dependencies {
     implementation(libs.kotlin.serialization)
     implementation(libs.retrofit)
     implementation(libs.retrofit.kotlin.serialization.converter)
+    implementation(libs.room.runtime)
+    implementation(libs.room.compiler)
+    ksp(libs.room.compiler)
     implementation(project(":keys"))
     implementation(project(":common:feature:weather:domain"))
     testImplementation(libs.junit)

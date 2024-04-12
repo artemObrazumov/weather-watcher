@@ -1,6 +1,6 @@
 package com.weather.data.remote.repository
 
-import com.weather.data.local.location.LocationManager
+import com.weather.data.location.LocationManager
 import com.weather.data.remote.models.RemoteWeather
 import com.weather.data.remote.models.RemoteWeatherClouds
 import com.weather.data.remote.models.RemoteWeatherMain

@@ -1,4 +1,4 @@
-package com.weather.data.local.location.models
+package com.weather.data.location.models
 
 data class Location(
     val latitude: Double,

@@ -1,6 +1,6 @@
-package com.weather.data.local.location
+package com.weather.data.location
 
-import com.weather.data.local.location.models.Location
+import com.weather.data.location.models.Location
 
 class LocationManager {
 
