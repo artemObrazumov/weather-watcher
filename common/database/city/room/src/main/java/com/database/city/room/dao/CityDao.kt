@@ -1,11 +1,13 @@
 package com.database.city.room.dao
 
+import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.database.city.room.entity.CityEntity
 
+@Dao
 interface CityDao {
 
     @Insert
@@ -19,5 +21,5 @@ interface CityDao {
     @Update(onConflict = OnConflictStrategy.IGNORE)
     suspend fun updateCity(
         city: CityEntity
-    ): Long
+    ): Int
 }

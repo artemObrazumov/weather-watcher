@@ -35,7 +35,7 @@ class CityLocalRoomRepositoryImpl(
     override suspend fun modifyCity(city: City): CitiesModifyResult {
         return try {
             CitiesModifyResult.Success(
-                database.cityDao.updateCity(city.toCityEntity())
+                database.cityDao.updateCity(city.toCityEntity()).toLong()
             )
         } catch (e: Exception) {
             CitiesModifyResult.Failure
