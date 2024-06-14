@@ -36,6 +36,7 @@ android {
 dependencies {
 
     implementation(libs.room.runtime)
+    implementation(project(":common:feature:city:domain"))
     annotationProcessor(libs.room.compiler)
     implementation(project(":common:database:city:room"))
     ksp(libs.room.compiler)

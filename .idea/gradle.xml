@@ -21,6 +21,7 @@
             <option value="$PROJECT_DIR$/common/feature/weather" />
             <option value="$PROJECT_DIR$/common/feature/weather/data" />
             <option value="$PROJECT_DIR$/common/feature/weather/domain" />
+            <option value="$PROJECT_DIR$/common/navigation" />
             <option value="$PROJECT_DIR$/common/network" />
             <option value="$PROJECT_DIR$/common/ui" />
             <option value="$PROJECT_DIR$/feature" />

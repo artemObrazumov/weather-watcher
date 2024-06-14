@@ -35,7 +35,7 @@ android {
 
 dependencies {
 
-    implementation(libs.room.runtime)
+    api(libs.room.runtime)
     annotationProcessor(libs.room.compiler)
     ksp(libs.room.compiler)
     testImplementation(libs.junit)
