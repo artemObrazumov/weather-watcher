@@ -1,6 +1,6 @@
 package com.city.data.repository
 
-import com.city.data.local.repository.CityLocalRoomRepositoryImpl
+import com.city.data.local.repository.CityLocalRepository
 import com.city.data.local.utils.toCity
 import com.city.data.local.utils.toDomain
 import com.city.domain.models.city.CityPagingItem
@@ -10,7 +10,7 @@ import com.city.domain.models.result.ModifyCityResult
 import com.city.domain.repository.CityRepository
 
 class CityRepositoryImpl(
-    private val cityLocalRoomRepositoryImpl: CityLocalRoomRepositoryImpl
+    private val cityLocalRoomRepositoryImpl: CityLocalRepository
 ): CityRepository {
     override suspend fun getCities(): GetCitiesResult =
         cityLocalRoomRepositoryImpl.loadCities().toDomain()

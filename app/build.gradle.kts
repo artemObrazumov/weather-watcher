@@ -1,7 +1,10 @@
+import org.gradle.configurationcache.extensions.capitalized
+import org.jetbrains.kotlin.gradle.tasks.AbstractKotlinCompileTool
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    alias(libs.plugins.ksp)
+    id("kotlin-kapt")
 }
 
 android {
@@ -41,7 +44,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.10"
     }
     packaging {
         resources {
@@ -52,20 +55,31 @@ android {
 
 dependencies {
 
+    implementation(project(":common:ui"))
+    implementation(project(":common:database:city:room"))
+    implementation(project(":common:navigation"))
+    implementation(project(":feature:main:presentation"))
+
+    // Room
+    implementation(libs.room.ktx)
+    implementation(libs.room.runtime)
+    //noinspection KaptUsageInsteadOfKsp
+    kapt(libs.room.compiler)
+
+    // Dagger
+    implementation(libs.dagger)
+    kapt(libs.dagger.compiler)
+
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.dagger)
-    ksp(libs.dagger.compiler)
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.navigation.compose)
-    implementation(project(":common:ui"))
-    implementation(project(":feature:main:presentation"))
-    implementation(project(":common:navigation"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -74,3 +88,18 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }
+
+//android {
+//    androidComponents {
+//        onVariants(selector().all()) { variant ->
+//            afterEvaluate {
+//                project.tasks.getByName("ksp" + variant.name.capitalized() + "Kotlin") {
+//                    val buildConfigTask = project.tasks.getByName("generate${variant.name.capitalized()}Proto")
+//                            as com.google.protobuf.gradle.GenerateProtoTask
+//                    dependsOn(buildConfigTask)
+//                    (this as AbstractKotlinCompileTool<*>).setSource(buildConfigTask.outputBaseDir)
+//                }
+//            }
+//        }
+//    }
+//}

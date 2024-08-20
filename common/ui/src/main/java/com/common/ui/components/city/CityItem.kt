@@ -42,16 +42,17 @@ fun CityItem(
 ) {
     Box(
         modifier = modifier
+            .shadow(
+                elevation = 8.dp,
+                clip = false,
+                shape = RoundedCornerShape(8.dp),
+                ambientColor = Color.Black,
+                spotColor = Color.Gray
+            )
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },
                 indication = WeatherWatcherTheme.purpleRipple,
                 onClick = {}
-            )
-            .shadow(
-                elevation = 8.dp,
-                shape = RoundedCornerShape(8.dp),
-                ambientColor = Color.Black,
-                spotColor = Color.Gray
             )
             .clip(RoundedCornerShape(8.dp))
             .background(if (selected) Purple80 else Color.White)

@@ -11,15 +11,15 @@ import com.database.city.room.entity.CityEntity
 interface CityDao {
 
     @Insert
-    suspend fun insertCity(
+    fun insertCity(
         city: CityEntity
     ): Long
 
     @Query("SELECT * FROM ${CityEntity.TABLE}")
-    suspend fun getCities(): List<CityEntity>
+    fun getCities(): List<CityEntity>
 
     @Update(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun updateCity(
+    fun updateCity(
         city: CityEntity
     ): Int
 }

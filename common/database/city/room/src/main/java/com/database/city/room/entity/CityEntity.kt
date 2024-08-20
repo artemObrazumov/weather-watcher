@@ -14,7 +14,7 @@ data class CityEntity(
     val city: String
 ) {
     companion object {
-        const val TABLE = "city"
+        const val TABLE = "city_table"
         const val ID = "id"
         const val CITY = "city"
     }

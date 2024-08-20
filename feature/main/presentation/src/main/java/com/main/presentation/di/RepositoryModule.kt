@@ -1,24 +1,21 @@
 package com.main.presentation.di
 
-import android.content.Context
+import com.city.data.local.models.City
+import com.city.data.local.models.result.CitiesGetResult
+import com.city.data.local.models.result.CitiesInsertResult
+import com.city.data.local.models.result.CitiesModifyResult
+import com.city.data.local.repository.CityLocalRepository
 import com.city.data.local.repository.CityLocalRoomRepositoryImpl
 import com.city.data.repository.CityRepositoryImpl
 import com.city.domain.repository.CityRepository
 import com.database.city.room.CityDatabase
-import com.main.presentation.screens.main.di.MainScreenScope
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
 
 @Module
 class RepositoryModule {
 
-    @Singleton
-    @Provides
-    fun provideCityLocalDatabase(context: Context): CityDatabase =
-        CityDatabase.create(context)
-
-    @MainScreenScope
+    @MainFeatureScope
     @Provides
     fun provideLocalRoomRepositoryImpl(database: CityDatabase): CityLocalRoomRepositoryImpl =
         CityLocalRoomRepositoryImpl(database)
@@ -26,6 +23,6 @@ class RepositoryModule {
     @MainFeatureScope
     @Provides
     fun provideCityRepository(
-        localRoomRepositoryImpl: CityLocalRoomRepositoryImpl
-    ): CityRepository = CityRepositoryImpl(localRoomRepositoryImpl)
+        cityLocalRepository: CityLocalRepository
+    ): CityRepository = CityRepositoryImpl(cityLocalRepository)
 }

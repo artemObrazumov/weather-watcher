@@ -1,5 +1,6 @@
 package com.main.presentation.di
 
+import com.main.presentation.screens.main.di.MainScreenComponent
 import dagger.Module
 import dagger.Subcomponent
 
@@ -12,4 +13,6 @@ interface MainFeatureComponent {
 
         fun create(): MainFeatureComponent
     }
+
+    val mainScreenComponentFactory: MainScreenComponent.Factory
 }

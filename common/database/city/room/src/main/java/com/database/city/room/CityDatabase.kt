@@ -7,7 +7,11 @@ import androidx.room.RoomDatabase
 import com.database.city.room.dao.CityDao
 import com.database.city.room.entity.CityEntity
 
-@Database(entities = [CityEntity::class], version = 1, exportSchema = false)
+@Database(
+    entities = [CityEntity::class],
+    version = 1,
+    exportSchema = false
+)
 abstract class CityDatabase: RoomDatabase() {
     abstract val cityDao: CityDao
 
@@ -19,6 +23,6 @@ abstract class CityDatabase: RoomDatabase() {
             context,
             CityDatabase::class.java,
             CITY_DATABASE_NAME
-        ).build()
+        ).fallbackToDestructiveMigration().build()
     }
 }

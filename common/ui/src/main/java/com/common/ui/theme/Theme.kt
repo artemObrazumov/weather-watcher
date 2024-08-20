@@ -66,7 +66,7 @@ fun WeatherWatcherTheme(
     val purpleRipple = rememberRipple(
         bounded = false,
         radius = 250.dp,
-        color = Color.Green
+        color = Purple40
     )
 
     CompositionLocalProvider(

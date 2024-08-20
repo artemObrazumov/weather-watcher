@@ -6,10 +6,8 @@ import com.common.weatherwatcher.di.application.AppComponent
 import com.common.weatherwatcher.di.application.DaggerAppComponent
 import com.main.presentation.di.MainFeatureComponent
 import com.main.presentation.di.MainFeatureComponentProvider
-import com.main.presentation.di.MainFeatureModule
-import kotlin.properties.Delegates.notNull
 
-class WeatherWatcherApp: Application()  {
+class WeatherWatcherApp: Application(), MainFeatureComponentProvider  {
 
     private var _appComponent: AppComponent? = null
     val appComponent get() = checkNotNull(_appComponent) {""}
@@ -17,6 +15,10 @@ class WeatherWatcherApp: Application()  {
     override fun onCreate() {
         super.onCreate()
         _appComponent = DaggerAppComponent.factory().create(this)
+    }
+
+    override fun provideMainFeatureComponent(): MainFeatureComponent {
+        return appComponent.mainFeatureComponentFactory.create()
     }
 }
 

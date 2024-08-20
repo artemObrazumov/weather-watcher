@@ -1,8 +1,8 @@
 package com.main.presentation.screens.main.di
 
+import com.city.domain.repository.CityRepository
 import com.city.domain.usecase.GetCitiesUseCase
 import com.main.presentation.screens.main.MainScreenViewModel
-import com.weather.domain.usecase.GetWeatherUseCase
 import dagger.Module
 import dagger.Provides
 
@@ -14,8 +14,7 @@ class MainScreenModule {
     @MainScreenScope
     @Provides
     fun provideMainScreenViewModel(
-        getCitiesUseCase: GetCitiesUseCase,
-        getWeatherUseCase: GetWeatherUseCase
+        cityRepository: CityRepository
     ): MainScreenViewModel =
-        MainScreenViewModel(getCitiesUseCase, getWeatherUseCase)
+        MainScreenViewModel(GetCitiesUseCase(cityRepository))
 }

@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    alias(libs.plugins.ksp)
+    id("kotlin-kapt")
 }
 
 android {
@@ -39,7 +39,7 @@ dependencies {
     implementation(project(":common:feature:city:domain"))
     annotationProcessor(libs.room.compiler)
     implementation(project(":common:database:city:room"))
-    ksp(libs.room.compiler)
+    kapt(libs.room.compiler)
     testImplementation(libs.junit)
     testImplementation(libs.coroutines.test)
     testImplementation(libs.mockk)
