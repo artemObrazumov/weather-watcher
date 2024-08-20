@@ -1,6 +1,6 @@
 package com.city.data.local.repository
 
-import com.city.data.local.models.City
+import com.city.domain.models.City
 import com.database.city.room.CityDatabase
 import com.city.data.local.models.result.CitiesGetResult
 import com.city.data.local.models.result.CitiesInsertResult
@@ -15,7 +15,7 @@ class CityLocalRoomRepositoryImpl(
     override suspend fun loadCities(): CitiesGetResult {
         return try {
             CitiesGetResult.Success(
-                database.cityDao.getCities().map { it.toCity() }
+                database.cityDao.getCities()
             )
         } catch (e: Exception) {
             CitiesGetResult.Failure

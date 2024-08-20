@@ -1,4 +1,4 @@
-package com.city.data.local.models
+package com.city.domain.models
 
 data class City(
     val id: Long,

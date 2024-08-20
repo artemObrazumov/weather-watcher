@@ -1,6 +1,6 @@
 package com.city.domain.usecase
 
-import com.city.domain.models.city.CityPagingItem
+import com.city.domain.models.City
 import com.city.domain.repository.CityRepository
 
 class ModifyCityUseCase(
@@ -8,6 +8,6 @@ class ModifyCityUseCase(
 ) {
 
     suspend operator fun invoke(
-        city: CityPagingItem.City
+        city: City
     ) = cityRepository.modifyCity(city)
 }

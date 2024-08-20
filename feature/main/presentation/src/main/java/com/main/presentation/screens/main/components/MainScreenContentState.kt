@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.city.domain.models.city.CityPagingItem
 import com.common.ui.components.city.CityItemRow
 import com.main.presentation.screens.main.state_hoisting.CitiesSectionState
 import com.main.presentation.screens.main.state_hoisting.MainScreenAction

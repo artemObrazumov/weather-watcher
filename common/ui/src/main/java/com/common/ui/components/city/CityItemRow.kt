@@ -20,14 +20,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.city.domain.models.city.CityPagingItem
+import com.city.domain.models.City
 import com.common.ui.theme.WeatherWatcherTheme
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CityItemRow(
     pagerState: PagerState,
-    cityRowItems: List<CityPagingItem>
+    cityRowItems: List<City>
 ) {
     LazyRow(
         modifier = Modifier.fillMaxWidth(),
@@ -35,19 +35,10 @@ fun CityItemRow(
         contentPadding = PaddingValues(bottom = 16.dp)
     ) {
         itemsIndexed(cityRowItems) { index, it ->
-            when (it) {
-                is CityPagingItem.City -> {
-                    CityItem(
-                        city = it.city,
-                        selected = index == pagerState.currentPage
-                    )
-                }
-                is CityPagingItem.Empty -> {
-                    CityItem(
-                        isNewItemPlaceholder = true
-                    )
-                }
-            }
+            CityItem(
+                city = it.city,
+                selected = index == pagerState.currentPage
+            )
         }
     }
 }
@@ -68,9 +59,8 @@ fun CityItemRowPreview() {
                 CityItemRow(
                     pagerState = pager,
                     cityRowItems = listOf(
-                        CityPagingItem.City(id = 1L, city = "Moscow"),
-                        CityPagingItem.City(id = 2L, city = "Arzamas"),
-                        CityPagingItem.Empty
+                        City(id = 1L, city = "Moscow"),
+                        City(id = 2L, city = "Arzamas")
                 ))
             }
         }

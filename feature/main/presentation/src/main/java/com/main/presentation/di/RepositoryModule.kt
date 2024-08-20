@@ -1,9 +1,5 @@
 package com.main.presentation.di
 
-import com.city.data.local.models.City
-import com.city.data.local.models.result.CitiesGetResult
-import com.city.data.local.models.result.CitiesInsertResult
-import com.city.data.local.models.result.CitiesModifyResult
 import com.city.data.local.repository.CityLocalRepository
 import com.city.data.local.repository.CityLocalRoomRepositoryImpl
 import com.city.data.repository.CityRepositoryImpl

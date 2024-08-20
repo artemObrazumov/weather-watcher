@@ -1,6 +1,6 @@
 package com.artemobrazumov.domain.test.usecase
 
-import com.city.domain.models.city.CityPagingItem
+import com.city.domain.models.City
 import com.city.domain.models.result.InsertCityResult
 import com.city.domain.repository.CityRepository
 import com.city.domain.usecase.InsertCityUseCase
@@ -17,7 +17,7 @@ class InsertCityUseCaseTest {
         val mockCityRepository = mockk<CityRepository>()
         val insertCityUseCase = InsertCityUseCase(mockCityRepository)
 
-        val city = CityPagingItem.City(0, "Moscow")
+        val city = City(0, "Moscow")
 
         coEvery {
             mockCityRepository.insertCity(city)
@@ -34,7 +34,7 @@ class InsertCityUseCaseTest {
         val mockCityRepository = mockk<CityRepository>()
         val insertCityUseCase = InsertCityUseCase(mockCityRepository)
 
-        val city = CityPagingItem.City(0, "Moscow")
+        val city = City(0, "Moscow")
         val cityId = 1L
 
         coEvery {

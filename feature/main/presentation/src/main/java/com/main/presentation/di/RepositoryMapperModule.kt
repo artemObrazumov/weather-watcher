@@ -1,10 +1,5 @@
 package com.main.presentation.di
 
-import com.city.data.local.repository.CityLocalRepository
-import com.city.data.local.repository.CityLocalRoomRepositoryImpl
-import com.city.data.repository.CityRepositoryImpl
-import com.city.domain.repository.CityRepository
-import dagger.Binds
 import dagger.Module
 
 @Module
