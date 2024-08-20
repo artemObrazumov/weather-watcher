@@ -1,10 +1,8 @@
-import org.gradle.configurationcache.extensions.capitalized
-import org.jetbrains.kotlin.gradle.tasks.AbstractKotlinCompileTool
-
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    id("kotlin-kapt")
+    alias(libs.plugins.hilt)
+    id(libs.plugins.kapt.get().pluginId)
 }
 
 android {
@@ -66,10 +64,9 @@ dependencies {
     //noinspection KaptUsageInsteadOfKsp
     kapt(libs.room.compiler)
 
-    // Dagger
-    implementation(libs.dagger)
-    kapt(libs.dagger.compiler)
-
+    // Dagger-Hilt
+    implementation(libs.dagger.hilt)
+    kapt(libs.dagger.hilt.compiler)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -88,18 +85,3 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }
-
-//android {
-//    androidComponents {
-//        onVariants(selector().all()) { variant ->
-//            afterEvaluate {
-//                project.tasks.getByName("ksp" + variant.name.capitalized() + "Kotlin") {
-//                    val buildConfigTask = project.tasks.getByName("generate${variant.name.capitalized()}Proto")
-//                            as com.google.protobuf.gradle.GenerateProtoTask
-//                    dependsOn(buildConfigTask)
-//                    (this as AbstractKotlinCompileTool<*>).setSource(buildConfigTask.outputBaseDir)
-//                }
-//            }
-//        }
-//    }
-//}

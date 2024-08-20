@@ -2,8 +2,6 @@ package com.common.weatherwatcher.di.application
 
 import android.content.Context
 import com.common.weatherwatcher.di.navigation.NavigationComponent
-import com.database.city.room.CityDatabase
-import com.database.city.room.di.CityDatabaseModule
 import com.main.presentation.di.MainFeatureComponent
 import dagger.BindsInstance
 import dagger.Component

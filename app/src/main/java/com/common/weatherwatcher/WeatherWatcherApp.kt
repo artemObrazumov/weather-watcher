@@ -6,7 +6,9 @@ import com.common.weatherwatcher.di.application.AppComponent
 import com.common.weatherwatcher.di.application.DaggerAppComponent
 import com.main.presentation.di.MainFeatureComponent
 import com.main.presentation.di.MainFeatureComponentProvider
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 class WeatherWatcherApp: Application(), MainFeatureComponentProvider  {
 
     private var _appComponent: AppComponent? = null

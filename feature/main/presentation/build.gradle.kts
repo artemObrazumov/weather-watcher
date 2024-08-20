@@ -2,7 +2,8 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.kotlinSerializationLibrary)
-    id("kotlin-kapt")
+    alias(libs.plugins.hilt)
+    id(libs.plugins.kapt.get().pluginId)
 }
 
 android {
@@ -79,7 +80,7 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    // Dagger
-    implementation(libs.dagger)
-    kapt(libs.dagger.compiler)
+    // Dagger-Hilt
+    implementation(libs.dagger.hilt)
+    kapt(libs.dagger.hilt.compiler)
 }

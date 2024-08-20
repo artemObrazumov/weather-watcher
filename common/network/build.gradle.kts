@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.hilt)
+    id(libs.plugins.kapt.get().pluginId)
 }
 
 android {
@@ -34,8 +36,10 @@ android {
 
 dependencies {
 
-    implementation(libs.dagger)
-    implementation(libs.dagger.compiler)
+    // Dagger-Hilt
+    implementation(libs.dagger.hilt)
+    kapt(libs.dagger.hilt.compiler)
+
     implementation(libs.kotlin.serialization)
     implementation(libs.okhttp)
     implementation(libs.okhttp.login)
