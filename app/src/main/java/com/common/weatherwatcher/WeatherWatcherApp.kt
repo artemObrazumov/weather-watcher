@@ -5,4 +5,4 @@ import android.content.Context
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class WeatherWatcherApp: Application()
+class WeatherWatcherApp: Application() {}

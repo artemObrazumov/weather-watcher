@@ -1,12 +1,9 @@
 package com.main.presentation.screens.main
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.main.presentation.screens.main.components.MainScreenContentState
-import com.main.presentation.screens.main.state_hoisting.MainScreenAction
-import com.main.presentation.screens.main.state_hoisting.MainScreenState
+import com.main.presentation.screens.main.components.MainScreenContent
 import kotlinx.serialization.Serializable
 
 @Composable
@@ -19,22 +16,6 @@ fun MainScreen(
         state = state,
         onAction = viewModel::onAction
     )
-}
-
-@Composable
-fun MainScreenContent(
-    state: MainScreenState,
-    onAction: (MainScreenAction) -> Unit
-) {
-
-    when(state) {
-        is MainScreenState.Content -> {
-            MainScreenContentState(
-                citiesSectionState = state.citiesSectionState,
-                onAction = onAction
-            )
-        }
-    }
 }
 
 @Serializable

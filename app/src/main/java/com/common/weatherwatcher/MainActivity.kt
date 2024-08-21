@@ -36,6 +36,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
+    @JvmSuppressWildcards
     @Inject
     lateinit var navigationApis: Set<NavigationItemApi>
 

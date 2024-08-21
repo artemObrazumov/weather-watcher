@@ -7,16 +7,17 @@ import com.city.data.local.models.result.CitiesInsertResult
 import com.city.data.local.models.result.CitiesModifyResult
 import com.city.data.local.utils.toCity
 import com.city.data.local.utils.toCityEntity
+import com.database.city.room.dao.CityDao
 import javax.inject.Inject
 
 class CityLocalRoomRepositoryImpl @Inject constructor(
-    private val database: CityDatabase
+    private val cityDao: CityDao
 ): CityLocalRepository {
 
     override suspend fun loadCities(): CitiesGetResult {
         return try {
             CitiesGetResult.Success(
-                database.cityDao.getCities()
+                cityDao.getCities()
             )
         } catch (e: Exception) {
             CitiesGetResult.Failure
@@ -26,7 +27,7 @@ class CityLocalRoomRepositoryImpl @Inject constructor(
     override suspend fun insertCity(city: City): CitiesInsertResult {
         return try {
             CitiesInsertResult.Success(
-                database.cityDao.insertCity(city.toCityEntity())
+                cityDao.insertCity(city.toCityEntity())
             )
         } catch (e: Exception) {
             CitiesInsertResult.Failure
@@ -36,7 +37,7 @@ class CityLocalRoomRepositoryImpl @Inject constructor(
     override suspend fun modifyCity(city: City): CitiesModifyResult {
         return try {
             CitiesModifyResult.Success(
-                database.cityDao.updateCity(city.toCityEntity()).toLong()
+                cityDao.updateCity(city.toCityEntity()).toLong()
             )
         } catch (e: Exception) {
             CitiesModifyResult.Failure

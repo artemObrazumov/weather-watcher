@@ -10,6 +10,7 @@ import com.main.presentation.screens.main.state_hoisting.MainScreenEffect
 import com.main.presentation.screens.main.state_hoisting.MainScreenState
 import com.weather.domain.usecase.GetWeatherUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
@@ -23,16 +24,17 @@ class MainScreenViewModel @Inject constructor(
 ): StatefulViewModel<MainScreenState, MainScreenEffect, MainScreenAction>() {
 
     val state = _state.receiveAsFlow()
-        .stateIn(viewModelScope,
+        .stateIn(
+            viewModelScope,
             SharingStarted.Eagerly,
-            MainScreenState.Content(citiesSectionState = CitiesSectionState.Loading)
+            MainScreenState(citiesSectionState = CitiesSectionState.Loading)
         )
 
     init {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             val res = getCitiesUseCase.invoke()
             if (res is GetCitiesResult.Failure) return@launch
-            updateState(MainScreenState.Content(
+            updateState(MainScreenState(
                 citiesSectionState = CitiesSectionState.Data( (res as GetCitiesResult.Success).cities )
             ))
         }

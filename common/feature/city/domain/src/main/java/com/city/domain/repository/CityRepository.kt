@@ -8,8 +8,6 @@ import com.city.domain.models.result.ModifyCityResult
 interface CityRepository {
 
     suspend fun getCities(): GetCitiesResult
-
     suspend fun insertCity(city: City): InsertCityResult
-
     suspend fun modifyCity(city: City): ModifyCityResult
 }

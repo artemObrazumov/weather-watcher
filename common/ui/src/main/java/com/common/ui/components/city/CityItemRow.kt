@@ -34,11 +34,18 @@ fun CityItemRow(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         contentPadding = PaddingValues(bottom = 16.dp)
     ) {
-        itemsIndexed(cityRowItems) { index, it ->
+        itemsIndexed(
+            items = cityRowItems,
+            key = { _, item -> item.id }
+        ) { index, it ->
             CityItem(
                 city = it.city,
                 selected = index == pagerState.currentPage
             )
+        }
+
+        item {
+            CityItem(isNewItemPlaceholder = true)
         }
     }
 }

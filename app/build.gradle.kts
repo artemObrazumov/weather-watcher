@@ -61,6 +61,9 @@ dependencies {
     // Room
     implementation(libs.room.ktx)
     implementation(libs.room.runtime)
+    implementation(project(":common:feature:city:data"))
+    implementation(project(":common:feature:city:data"))
+    implementation(project(":common:feature:city:domain"))
     //noinspection KaptUsageInsteadOfKsp
     kapt(libs.room.compiler)
 

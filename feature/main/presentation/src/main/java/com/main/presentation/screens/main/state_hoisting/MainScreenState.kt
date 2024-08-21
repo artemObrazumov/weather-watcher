@@ -2,12 +2,9 @@ package com.main.presentation.screens.main.state_hoisting
 
 import com.city.domain.models.City
 
-sealed class MainScreenState {
-
-    data class Content(
-        val citiesSectionState: CitiesSectionState
-    ): MainScreenState()
-}
+data class MainScreenState (
+    val citiesSectionState: CitiesSectionState
+)
 
 sealed class CitiesSectionState {
 

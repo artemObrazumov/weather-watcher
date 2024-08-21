@@ -10,14 +10,14 @@ import com.city.domain.repository.CityRepository
 import javax.inject.Inject
 
 class CityRepositoryImpl @Inject constructor(
-    private val cityLocalRoomRepositoryImpl: CityLocalRepository
+    private val cityLocalRepository: CityLocalRepository
 ): CityRepository {
     override suspend fun getCities(): GetCitiesResult =
-        cityLocalRoomRepositoryImpl.loadCities().toDomain()
+        cityLocalRepository.loadCities().toDomain()
 
     override suspend fun insertCity(city: City): InsertCityResult =
-        cityLocalRoomRepositoryImpl.insertCity(city).toDomain()
+        cityLocalRepository.insertCity(city).toDomain()
 
     override suspend fun modifyCity(city: City): ModifyCityResult =
-        cityLocalRoomRepositoryImpl.modifyCity(city).toDomain()
+        cityLocalRepository.modifyCity(city).toDomain()
 }
