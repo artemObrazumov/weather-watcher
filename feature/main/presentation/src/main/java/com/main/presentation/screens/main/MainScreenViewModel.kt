@@ -9,12 +9,15 @@ import com.main.presentation.screens.main.state_hoisting.MainScreenAction
 import com.main.presentation.screens.main.state_hoisting.MainScreenEffect
 import com.main.presentation.screens.main.state_hoisting.MainScreenState
 import com.weather.domain.usecase.GetWeatherUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainScreenViewModel(
+@HiltViewModel
+class MainScreenViewModel @Inject constructor(
     getCitiesUseCase: GetCitiesUseCase,
     //getWeatherUseCase: GetWeatherUseCase
 ): StatefulViewModel<MainScreenState, MainScreenEffect, MainScreenAction>() {

@@ -7,8 +7,9 @@ import com.city.domain.models.result.GetCitiesResult
 import com.city.domain.models.result.InsertCityResult
 import com.city.domain.models.result.ModifyCityResult
 import com.city.domain.repository.CityRepository
+import javax.inject.Inject
 
-class CityRepositoryImpl(
+class CityRepositoryImpl @Inject constructor(
     private val cityLocalRoomRepositoryImpl: CityLocalRepository
 ): CityRepository {
     override suspend fun getCities(): GetCitiesResult =

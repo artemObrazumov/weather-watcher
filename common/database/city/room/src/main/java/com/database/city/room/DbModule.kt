@@ -1,7 +1,6 @@
-package com.common.weatherwatcher.di.application
+package com.database.city.room
 
 import android.content.Context
-import com.database.city.room.CityDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,6 +10,9 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AppModule {
+object DbModule {
 
+//    @Singleton
+//    @Provides
+//    fun provideDb(@ApplicationContext context: Context) = CityDatabase.create(context)
 }

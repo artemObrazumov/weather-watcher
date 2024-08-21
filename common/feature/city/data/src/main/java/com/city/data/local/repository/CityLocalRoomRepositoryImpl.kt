@@ -7,8 +7,9 @@ import com.city.data.local.models.result.CitiesInsertResult
 import com.city.data.local.models.result.CitiesModifyResult
 import com.city.data.local.utils.toCity
 import com.city.data.local.utils.toCityEntity
+import javax.inject.Inject
 
-class CityLocalRoomRepositoryImpl(
+class CityLocalRoomRepositoryImpl @Inject constructor(
     private val database: CityDatabase
 ): CityLocalRepository {
 

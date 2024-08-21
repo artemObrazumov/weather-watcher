@@ -29,8 +29,16 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import com.common.ui.theme.WeatherWatcherTheme
 import com.common.weatherwatcher.navigation.AppNavGraph
+import com.weatherwatcher.navigation.NavigationItemApi
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    @Inject
+    lateinit var navigationApis: Set<NavigationItemApi>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -39,11 +47,9 @@ class MainActivity : ComponentActivity() {
 
                 val navController = rememberNavController()
 
-                val navigationComponent = getAppComponent().navigationFactory.create()
-
                 AppNavGraph(
                     navController = navController,
-                    navigationApis = navigationComponent.navigationItemApis
+                    navigationApis = navigationApis
                 )
             }
         }

@@ -17,11 +17,12 @@ kotlinSerialization = "1.6.3"
 dagger = "2.51.1"
 okhttp = "4.12.0"
 room = "2.6.1"
-hilt = "2.44"
+hilt = "2.46"
 uiTooling = "1.6.5"
 navigationCompose = "2.8.0-beta02"
 navigationRuntimeKtx = "2.7.7"
 navigationCommonKtx = "2.7.7"
+hiltNavCompose = "1.2.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -47,6 +48,7 @@ kotlin-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serial
 retrofit-kotlin-serialization-converter = { group = "com.squareup.retrofit2", name = "converter-kotlinx-serialization", version.ref = "retrofit" }
 dagger-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
+hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavCompose" }
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
 okhttp-login = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
