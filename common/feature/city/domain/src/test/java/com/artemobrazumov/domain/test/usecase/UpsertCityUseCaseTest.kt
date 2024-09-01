@@ -1,49 +1,49 @@
 package com.artemobrazumov.domain.test.usecase
 
 import com.city.domain.models.City
-import com.city.domain.models.result.InsertCityResult
+import com.city.domain.models.result.UpsertCityResult
 import com.city.domain.repository.CityRepository
-import com.city.domain.usecase.InsertCityUseCase
+import com.city.domain.usecase.UpsertCityUseCase
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert
 import org.junit.Test
 
-class InsertCityUseCaseTest {
+class UpsertCityUseCaseTest {
 
     @Test
     fun `should return failure result`() = runTest {
         val mockCityRepository = mockk<CityRepository>()
-        val insertCityUseCase = InsertCityUseCase(mockCityRepository)
+        val upsertCityUseCase = UpsertCityUseCase(mockCityRepository)
 
         val city = City(0, "Moscow")
 
         coEvery {
-            mockCityRepository.insertCity(city)
-        } returns InsertCityResult.Failure
+            mockCityRepository.upsertCity(city)
+        } returns UpsertCityResult.Failure
 
         Assert.assertEquals(
-            insertCityUseCase(city),
-            InsertCityResult.Failure
+            upsertCityUseCase(city),
+            UpsertCityResult.Failure
         )
     }
 
     @Test
     fun `should return expected city id result`() = runTest {
         val mockCityRepository = mockk<CityRepository>()
-        val insertCityUseCase = InsertCityUseCase(mockCityRepository)
+        val upsertCityUseCase = UpsertCityUseCase(mockCityRepository)
 
         val city = City(0, "Moscow")
         val cityId = 1L
 
         coEvery {
-            mockCityRepository.insertCity(city)
-        } returns InsertCityResult.Success(cityId)
+            mockCityRepository.upsertCity(city)
+        } returns UpsertCityResult.Success(cityId)
 
         Assert.assertEquals(
-            insertCityUseCase(city),
-            InsertCityResult.Success(cityId)
+            upsertCityUseCase(city),
+            UpsertCityResult.Success(cityId)
         )
     }
 }

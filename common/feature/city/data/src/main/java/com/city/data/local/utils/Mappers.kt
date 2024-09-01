@@ -1,13 +1,16 @@
 package com.city.data.local.utils
 
 import com.city.domain.models.City
-import com.city.data.local.models.result.CitiesGetResult
-import com.city.data.local.models.result.CitiesInsertResult
+import com.city.data.local.models.result.CitiesEntityGetResult
+import com.city.data.local.models.result.CitiesUpsertResult
 import com.city.data.local.models.result.CitiesModifyResult
-import com.city.domain.models.result.GetCitiesResult
-import com.city.domain.models.result.InsertCityResult
+import com.city.data.local.models.result.CityEntityGetResult
+import com.city.domain.models.result.CitiesGetResult
+import com.city.domain.models.result.CityGetResult
+import com.city.domain.models.result.UpsertCityResult
 import com.city.domain.models.result.ModifyCityResult
 import com.database.city.room.entity.CityEntity
+import kotlinx.coroutines.flow.map
 
 fun CityEntity.toCity(): City =
     City(
@@ -18,20 +21,35 @@ fun CityEntity.toCity(): City =
 fun City.toCityEntity(): CityEntity =
     CityEntity(
         id = this.id,
-        city = this.city
+        city = this.city,
+        x = this.x,
+        y = this.y
     )
 
-fun CitiesGetResult.toDomain(): GetCitiesResult = when (this) {
-    is CitiesGetResult.Success -> GetCitiesResult.Success(this.items.map { it.toCity() })
-    is CitiesGetResult.Failure -> GetCitiesResult.Failure
+fun CitiesEntityGetResult.toDomain(): CitiesGetResult = when (this) {
+    is CitiesEntityGetResult.Success -> CitiesGetResult.Success(
+        this.itemsFlow.map {
+            it.map { city -> city.toCity()  }
+        }
+    )
+    is CitiesEntityGetResult.Failure -> CitiesGetResult.Failure
 }
 
-fun CitiesInsertResult.toDomain(): InsertCityResult = when (this) {
-    is CitiesInsertResult.Success -> InsertCityResult.Success(this.id)
-    is CitiesInsertResult.Failure -> InsertCityResult.Failure
+fun CitiesUpsertResult.toDomain(): UpsertCityResult = when (this) {
+    is CitiesUpsertResult.Success -> UpsertCityResult.Success(this.id)
+    is CitiesUpsertResult.Failure -> UpsertCityResult.Failure
 }
 
 fun CitiesModifyResult.toDomain(): ModifyCityResult = when (this) {
     is CitiesModifyResult.Success -> ModifyCityResult.Success
     is CitiesModifyResult.Failure -> ModifyCityResult.Failure
+}
+
+fun CityEntityGetResult.toDomain(): CityGetResult = when (this) {
+    is CityEntityGetResult.Success -> CityGetResult.Success(
+        this.itemFlow.map {
+            it.toCity()
+        }
+    )
+    is CityEntityGetResult.Failure -> CityGetResult.Failure
 }

@@ -12,6 +12,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -38,7 +41,8 @@ fun CityItem(
     modifier: Modifier = Modifier,
     city: String = String(),
     selected: Boolean = false,
-    isNewItemPlaceholder: Boolean = false
+    isNewItemPlaceholder: Boolean = false,
+    onClick: () -> Unit = {}
 ) {
     Box(
         modifier = modifier
@@ -52,7 +56,7 @@ fun CityItem(
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },
                 indication = WeatherWatcherTheme.purpleRipple,
-                onClick = {}
+                onClick = onClick
             )
             .clip(RoundedCornerShape(8.dp))
             .background(if (selected) Purple80 else Color.White)
@@ -76,9 +80,7 @@ fun CityItemContent(
 ) {
     Row {
         Image(
-            painter = painterResource(
-                id = R.drawable.baseline_arrow_downward_24,
-            ),
+            Icons.Default.Place,
             contentDescription = null,
             colorFilter = ColorFilter.tint(
                 if (selected) Color.White else Color.Black
@@ -103,9 +105,7 @@ fun CityItemContent(
 fun EmptyCityItemContent() {
     Row {
         Image(
-            painter = painterResource(
-                id = R.drawable.baseline_arrow_downward_24
-            ),
+            Icons.Default.Add,
             contentDescription = null
         )
         Text(

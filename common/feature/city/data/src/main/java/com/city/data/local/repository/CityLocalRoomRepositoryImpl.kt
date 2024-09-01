@@ -1,12 +1,11 @@
 package com.city.data.local.repository
 
-import com.city.domain.models.City
-import com.database.city.room.CityDatabase
-import com.city.data.local.models.result.CitiesGetResult
-import com.city.data.local.models.result.CitiesInsertResult
+import com.city.data.local.models.result.CitiesEntityGetResult
+import com.city.data.local.models.result.CitiesUpsertResult
 import com.city.data.local.models.result.CitiesModifyResult
-import com.city.data.local.utils.toCity
+import com.city.data.local.models.result.CityEntityGetResult
 import com.city.data.local.utils.toCityEntity
+import com.city.domain.models.City
 import com.database.city.room.dao.CityDao
 import javax.inject.Inject
 
@@ -14,23 +13,23 @@ class CityLocalRoomRepositoryImpl @Inject constructor(
     private val cityDao: CityDao
 ): CityLocalRepository {
 
-    override suspend fun loadCities(): CitiesGetResult {
+    override suspend fun loadCities(): CitiesEntityGetResult {
         return try {
-            CitiesGetResult.Success(
+            CitiesEntityGetResult.Success(
                 cityDao.getCities()
             )
         } catch (e: Exception) {
-            CitiesGetResult.Failure
+            CitiesEntityGetResult.Failure
         }
     }
 
-    override suspend fun insertCity(city: City): CitiesInsertResult {
+    override suspend fun upsertCity(city: City): CitiesUpsertResult {
         return try {
-            CitiesInsertResult.Success(
-                cityDao.insertCity(city.toCityEntity())
+            CitiesUpsertResult.Success(
+                cityDao.upsertCity(city.toCityEntity()).toInt()
             )
         } catch (e: Exception) {
-            CitiesInsertResult.Failure
+            CitiesUpsertResult.Failure
         }
     }
 
@@ -41,6 +40,16 @@ class CityLocalRoomRepositoryImpl @Inject constructor(
             )
         } catch (e: Exception) {
             CitiesModifyResult.Failure
+        }
+    }
+
+    override suspend fun getCityById(cityId: Int): CityEntityGetResult {
+        return try {
+            CityEntityGetResult.Success(
+                cityDao.getCityById(cityId)
+            )
+        } catch (e: Exception) {
+            CityEntityGetResult.Failure
         }
     }
 }

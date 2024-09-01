@@ -1,16 +1,13 @@
 package com.main.presentation.screens.main.state_hoisting
 
 import com.city.domain.models.City
+import kotlinx.coroutines.flow.Flow
 
-data class MainScreenState (
-    val citiesSectionState: CitiesSectionState
-)
-
-sealed class CitiesSectionState {
-
+sealed class MainScreenState {
     data class Data(
-        val cities: List<City>
-    ): CitiesSectionState()
+        val cities: Flow<List<City>>,
+        val currentPage: Int
+    ) : MainScreenState()
 
-    data object Loading: CitiesSectionState()
+    data object Loading : MainScreenState()
 }

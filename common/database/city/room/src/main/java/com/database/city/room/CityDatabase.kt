@@ -9,7 +9,7 @@ import com.database.city.room.entity.CityEntity
 
 @Database(
     entities = [CityEntity::class],
-    version = 1,
+    version = 3,
     exportSchema = false
 )
 abstract class CityDatabase: RoomDatabase() {

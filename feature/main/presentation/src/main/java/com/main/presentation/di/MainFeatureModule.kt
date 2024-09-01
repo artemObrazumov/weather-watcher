@@ -1,4 +1,4 @@
-package com.common.weatherwatcher.di
+package com.main.presentation.di
 
 import com.main.presentation.navigation.MainFeatureNavigationApi
 import com.weatherwatcher.navigation.NavigationItemApi
@@ -10,13 +10,9 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object NavigationModule {
+class MainFeatureModule {
 
-    @Singleton
     @Provides
-    fun provideNavigation(
-        mainFeature: MainFeatureNavigationApi
-    ): Set<NavigationItemApi> = setOf(
-        mainFeature,
-    )
+    @Singleton
+    fun provideMainFeatureNavigationApi(): NavigationItemApi = MainFeatureNavigationApi()
 }

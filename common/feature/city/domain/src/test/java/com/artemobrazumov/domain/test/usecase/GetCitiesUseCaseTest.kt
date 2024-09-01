@@ -1,11 +1,13 @@
 package com.artemobrazumov.domain.test.usecase
 
 import com.city.domain.models.City
-import com.city.domain.models.result.GetCitiesResult
+import com.city.domain.models.result.CitiesGetResult
 import com.city.domain.repository.CityRepository
 import com.city.domain.usecase.GetCitiesUseCase
 import io.mockk.coEvery
 import io.mockk.mockk
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert
 import org.junit.Test
@@ -19,11 +21,11 @@ class GetCitiesUseCaseTest {
 
         coEvery {
             mockCityRepository.getCities()
-        } returns GetCitiesResult.Failure
+        } returns CitiesGetResult.Failure
 
         Assert.assertEquals(
             getCityUseCase(),
-            GetCitiesResult.Failure
+            CitiesGetResult.Failure
         )
     }
 
@@ -32,15 +34,15 @@ class GetCitiesUseCaseTest {
         val mockCityRepository = mockk<CityRepository>()
         val getCityUseCase = GetCitiesUseCase(mockCityRepository)
 
-        val expectedCitiesResult = emptyList<City>()
+        val expectedCitiesResult = flowOf(emptyList<City>())
 
         coEvery {
             mockCityRepository.getCities()
-        } returns GetCitiesResult.Success(expectedCitiesResult)
+        } returns CitiesGetResult.Success(expectedCitiesResult)
 
         Assert.assertEquals(
             getCityUseCase(),
-            GetCitiesResult.Success(expectedCitiesResult)
+            CitiesGetResult.Success(expectedCitiesResult)
         )
     }
 
@@ -49,19 +51,21 @@ class GetCitiesUseCaseTest {
         val mockCityRepository = mockk<CityRepository>()
         val getCityUseCase = GetCitiesUseCase(mockCityRepository)
 
-        val expectedCitiesResult = listOf(
-            City(id = 0, city = "Moscow"),
-            City(id = 0, city = "Novosibirsk"),
-            City(id = 0, city = "Yekaterinburg")
+        val expectedCitiesResult = flowOf(
+            listOf(
+                City(id = 0, city = "Moscow"),
+                City(id = 0, city = "Novosibirsk"),
+                City(id = 0, city = "Yekaterinburg")
+            )
         )
 
         coEvery {
             mockCityRepository.getCities()
-        } returns GetCitiesResult.Success(expectedCitiesResult)
+        } returns CitiesGetResult.Success(expectedCitiesResult)
 
         Assert.assertEquals(
             getCityUseCase(),
-            GetCitiesResult.Success(expectedCitiesResult)
+            CitiesGetResult.Success(expectedCitiesResult)
         )
     }
 }

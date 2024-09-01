@@ -45,8 +45,8 @@ dependencies {
     // Dagger-Hilt
     implementation(libs.dagger.hilt)
     kapt(libs.dagger.hilt.compiler)
-    implementation("com.squareup:javapoet:1.13.0")
 
+    // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

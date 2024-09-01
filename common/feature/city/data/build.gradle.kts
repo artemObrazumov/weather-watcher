@@ -35,13 +35,20 @@ android {
 
 dependencies {
 
-    implementation("javax.inject:javax.inject:1")
-
-    implementation(libs.room.runtime)
+    // City
+    api(project(":common:database:city:room"))
     implementation(project(":common:feature:city:domain"))
-    annotationProcessor(libs.room.compiler)
-    implementation(project(":common:database:city:room"))
+
+    // Inject
+    implementation(libs.javax.inject)
+
+    // Room
+    implementation(libs.room.ktx)
+    implementation(libs.room.runtime)
+    //noinspection KaptUsageInsteadOfKsp
     kapt(libs.room.compiler)
+
+    // Testing
     testImplementation(libs.junit)
     testImplementation(libs.coroutines.test)
     testImplementation(libs.mockk)

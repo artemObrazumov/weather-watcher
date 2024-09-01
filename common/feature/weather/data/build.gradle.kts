@@ -36,13 +36,26 @@ android {
 
 dependencies {
 
-    implementation(libs.kotlin.serialization)
-    implementation(libs.retrofit)
-    implementation(libs.retrofit.kotlin.serialization.converter)
-    implementation(libs.room.runtime)
-    kapt(libs.room.compiler)
+    // Keys
     implementation(project(":keys"))
+
+    // Weather
     implementation(project(":common:feature:weather:domain"))
+
+    // Serialization
+    implementation(libs.kotlin.serialization)
+    implementation(libs.retrofit.kotlin.serialization.converter)
+
+    // Retrofit
+    implementation(libs.retrofit)
+
+    // Room
+    implementation(libs.room.ktx)
+    implementation(libs.room.runtime)
+    //noinspection KaptUsageInsteadOfKsp
+    kapt(libs.room.compiler)
+
+    // Testing
     testImplementation(libs.junit)
     testImplementation(libs.coroutines.test)
     testImplementation(libs.mockk)

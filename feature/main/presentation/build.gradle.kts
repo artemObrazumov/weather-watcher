@@ -43,13 +43,19 @@ android {
 
 dependencies {
 
-    // Modules
+    // UI
     implementation(project(":common:ui"))
-    implementation(project(":common:feature:city:domain"))
-    implementation(project(":common:feature:weather:domain"))
-    implementation(project(":common:feature:city:data"))
-    implementation(project(":common:database:city:room"))
+
+    // Navigation
     implementation(project(":common:navigation"))
+
+    // City
+    api(project(":common:feature:city:domain"))
+    api(project(":common:feature:city:data"))
+    implementation(project(":common:database:city:room"))
+
+    // Weather
+    api(project(":common:feature:weather:domain"))
 
     // Room
     implementation(libs.room.ktx)
@@ -57,34 +63,38 @@ dependencies {
     //noinspection KaptUsageInsteadOfKsp
     kapt(libs.room.compiler)
 
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.3")
+    // Dagger-Hilt
+    implementation(libs.dagger.hilt)
+    kapt(libs.dagger.hilt.compiler)
+    implementation(libs.hilt.navigation.compose)
+
+    // Android
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.navigation.common.ktx)
-    implementation(libs.androidx.navigation.runtime.ktx)
-    implementation(libs.navigation.compose)
-
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-    implementation(libs.kotlin.serialization)
-
+    implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.navigation.common.ktx)
     implementation(libs.androidx.navigation.runtime.ktx)
+    implementation(libs.navigation.compose)
+    //implementation ("androidx.fragment:fragment-ktx:1.8.2")
+
+    // Serialization
+    implementation(libs.kotlin.serialization)
+
+    // Coroutines
+    implementation(libs.kotlinx.coroutines.core)
+
+    // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-    // Dagger-Hilt
-    implementation(libs.dagger.hilt)
-    kapt(libs.dagger.hilt.compiler)
-    implementation(libs.hilt.navigation.compose)
-    implementation("com.squareup:javapoet:1.13.0")
 }
 
 kapt {

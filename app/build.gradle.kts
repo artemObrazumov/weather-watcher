@@ -53,17 +53,18 @@ android {
 
 dependencies {
 
+    // UI
     implementation(project(":common:ui"))
-    implementation(project(":common:database:city:room"))
+
+    // Navigation
     implementation(project(":common:navigation"))
+
+    // Features
     implementation(project(":feature:main:presentation"))
 
     // Room
     implementation(libs.room.ktx)
     implementation(libs.room.runtime)
-    implementation(project(":common:feature:city:data"))
-    implementation(project(":common:feature:city:data"))
-    implementation(project(":common:feature:city:domain"))
     //noinspection KaptUsageInsteadOfKsp
     kapt(libs.room.compiler)
 
@@ -73,6 +74,7 @@ dependencies {
     kapt("com.google.dagger:hilt-android-testing:2.46")
     implementation("com.squareup:javapoet:1.13.0")
 
+    // Android
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -82,6 +84,8 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.navigation.compose)
+
+    // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

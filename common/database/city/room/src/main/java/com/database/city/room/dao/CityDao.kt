@@ -1,25 +1,31 @@
 package com.database.city.room.dao
 
 import androidx.room.Dao
-import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import androidx.room.Upsert
 import com.database.city.room.entity.CityEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CityDao {
 
-    @Insert
-    fun insertCity(
+    @Upsert
+    suspend fun upsertCity(
         city: CityEntity
     ): Long
 
     @Query("SELECT * FROM ${CityEntity.TABLE}")
-    fun getCities(): List<CityEntity>
+    fun getCities(): Flow<List<CityEntity>>
+
+    @Query("SELECT * FROM ${CityEntity.TABLE} WHERE ${CityEntity.CITY} = :cityId")
+    fun getCityById(
+        cityId: Int
+    ): Flow<CityEntity>
 
     @Update(onConflict = OnConflictStrategy.IGNORE)
-    fun updateCity(
+    suspend fun updateCity(
         city: CityEntity
     ): Int
 }
