@@ -43,6 +43,9 @@ dependencies {
     // City
     implementation(project(":common:feature:city:domain"))
 
+    // Weather
+    implementation(project(":common:feature:weather:domain"))
+
     // Android
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

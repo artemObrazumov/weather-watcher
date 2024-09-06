@@ -6,5 +6,5 @@ sealed class GetWeatherResult {
 
     data class Success(val weather: Weather): GetWeatherResult()
 
-    data object Failure: GetWeatherResult()
+    data class Failure(val errorMessage: String): GetWeatherResult()
 }

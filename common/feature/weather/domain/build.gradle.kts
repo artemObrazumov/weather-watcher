@@ -34,6 +34,9 @@ android {
 
 dependencies {
 
+    // Inject
+    implementation(libs.javax.inject)
+
     // Testing
     testImplementation(libs.junit)
     testImplementation(libs.coroutines.test)

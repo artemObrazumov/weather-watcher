@@ -56,6 +56,7 @@ dependencies {
 
     // Weather
     api(project(":common:feature:weather:domain"))
+    api(project(":common:feature:weather:data"))
 
     // Room
     implementation(libs.room.ktx)

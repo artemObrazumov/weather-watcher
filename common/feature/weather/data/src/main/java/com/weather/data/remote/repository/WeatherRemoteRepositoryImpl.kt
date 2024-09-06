@@ -1,12 +1,11 @@
 package com.weather.data.remote.repository
 
-import com.weather.data.location.LocationManager
 import com.weather.data.remote.models.result.RemoteWeatherResult
 import com.weather.data.remote.network.WeatherNetworkService
+import javax.inject.Inject
 
-class WeatherRemoteRepositoryImpl(
-    private val weatherNetworkService: WeatherNetworkService,
-    private val locationManager: LocationManager
+class WeatherRemoteRepositoryImpl @Inject constructor(
+    private val weatherNetworkService: WeatherNetworkService
 ): WeatherRemoteRepository {
 
     override suspend fun getWeather(

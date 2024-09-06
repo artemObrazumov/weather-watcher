@@ -26,7 +26,7 @@ import kotlinx.coroutines.launch
 class CityEditorScreenViewModel @AssistedInject constructor(
     private val upsertCityUseCase: UpsertCityUseCase,
     private val getCityUseCase: GetCityUseCase,
-    @Assisted val cityId: Int
+    @Assisted private val cityId: Int
 ) : StatefulViewModel<CityEditorScreenState, CityEditorScreenEffect, CityEditorScreenAction>() {
 
     private val isAddingNewCity = cityId == -1

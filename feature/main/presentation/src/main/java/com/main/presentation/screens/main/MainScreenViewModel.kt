@@ -21,7 +21,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainScreenViewModel @Inject constructor(
-    getCitiesUseCase: GetCitiesUseCase
+    private val getCitiesUseCase: GetCitiesUseCase
 ) : StatefulViewModel<MainScreenState, MainScreenEffect, MainScreenAction>() {
 
     val state = _state.receiveAsFlow()

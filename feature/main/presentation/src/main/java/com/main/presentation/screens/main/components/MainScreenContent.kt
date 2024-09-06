@@ -1,20 +1,23 @@
 package com.main.presentation.screens.main.components
 
-import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import com.common.ui.components.city.CityItemRow
+import com.common.ui.theme.WeatherWatcherTheme
+import com.main.presentation.screens.city_page.state_hoisting.WeatherState
 import com.main.presentation.screens.main.state_hoisting.MainScreenAction
 import com.main.presentation.screens.main.state_hoisting.MainScreenState
 
@@ -31,23 +34,40 @@ fun MainScreenContent(
         ) {
             when (state) {
                 is MainScreenState.Data -> {
-                    val cities = state.cities.collectAsState(initial = emptyList())
+                    val cities by state.cities.collectAsState(initial = emptyList())
 
-                    val pager = rememberPagerState(
-                        pageCount = { cities.value.size }
+                    val pagerState = rememberPagerState(
+                        pageCount = { cities.size }
                     )
                     LaunchedEffect(state.currentPage) {
-                        pager.scrollToPage(state.currentPage)
+                        pagerState.animateScrollToPage(state.currentPage)
+                    }
+                    LaunchedEffect(pagerState.currentPage) {
+                        onAction(MainScreenAction.OpenTab(pagerState.currentPage))
                     }
 
                     CityItemRow(
                         currentPage = state.currentPage,
-                        cityRowItems = cities.value,
-                        onItemClick = {
-                            onAction(MainScreenAction.OpenTab(it))
-                        },
+                        cityRowItems = cities,
+                        onItemClick = { onAction(MainScreenAction.OpenTab(it)) },
                         onNewItemClick = { onAction(MainScreenAction.AddNewCity) }
                     )
+
+                    Spacer(modifier = Modifier.height(WeatherWatcherTheme.paddings.medium))
+
+                    if (cities.isNotEmpty()) {
+                        HorizontalPager(
+                            state = pagerState,
+                            modifier = Modifier.weight(1f),
+                            contentPadding = PaddingValues(
+                                horizontal = WeatherWatcherTheme.paddings.medium
+                            )
+                        ) { index ->
+                            CityPagerPage(
+                                cityId = cities[index].id ?: -1
+                            )
+                        }
+                    }
                 }
 
                 is MainScreenState.Loading -> {}

@@ -44,7 +44,8 @@ fun CityEditorScreenContent(
             TopAppBar(
                 title = {
                     Text(
-                        text = if (state.isAddingNewCity) "Добавление города" else "Редактирование города"
+                        text = if (state.isAddingNewCity) "Добавление города"
+                        else "Редактирование города"
                     )
                 }
             )

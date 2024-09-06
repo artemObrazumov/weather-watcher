@@ -19,7 +19,7 @@ interface CityDao {
     @Query("SELECT * FROM ${CityEntity.TABLE}")
     fun getCities(): Flow<List<CityEntity>>
 
-    @Query("SELECT * FROM ${CityEntity.TABLE} WHERE ${CityEntity.CITY} = :cityId")
+    @Query("SELECT * FROM ${CityEntity.TABLE} WHERE ${CityEntity.ID} = :cityId")
     fun getCityById(
         cityId: Int
     ): Flow<CityEntity>

@@ -7,7 +7,7 @@ import com.weather.domain.models.weather.Weather
 
 fun RemoteWeatherResult.toDomain() = when (this) {
     is RemoteWeatherResult.Success -> GetWeatherResult.Success(this.remoteWeather.toDomain())
-    is RemoteWeatherResult.Failure -> GetWeatherResult.Failure
+    is RemoteWeatherResult.Failure -> GetWeatherResult.Failure("error")
 }
 
 fun RemoteWeather.toDomain() =

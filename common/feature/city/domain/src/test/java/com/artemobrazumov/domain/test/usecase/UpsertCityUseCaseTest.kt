@@ -35,7 +35,7 @@ class UpsertCityUseCaseTest {
         val upsertCityUseCase = UpsertCityUseCase(mockCityRepository)
 
         val city = City(0, "Moscow")
-        val cityId = 1L
+        val cityId = 1
 
         coEvery {
             mockCityRepository.upsertCity(city)

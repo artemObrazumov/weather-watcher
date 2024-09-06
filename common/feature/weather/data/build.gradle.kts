@@ -39,8 +39,15 @@ dependencies {
     // Keys
     implementation(project(":keys"))
 
+    // Network
+    api(project(":common:network"))
+
     // Weather
     implementation(project(":common:feature:weather:domain"))
+
+    // Dagger-Hilt
+    implementation(libs.dagger.hilt)
+    kapt(libs.dagger.hilt.compiler)
 
     // Serialization
     implementation(libs.kotlin.serialization)

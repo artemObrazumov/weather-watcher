@@ -15,7 +15,9 @@ import kotlinx.coroutines.flow.map
 fun CityEntity.toCity(): City =
     City(
         id = this.id,
-        city = this.city
+        city = this.city,
+        x = this.x,
+        y = this.y
     )
 
 fun City.toCityEntity(): CityEntity =
@@ -47,8 +49,8 @@ fun CitiesModifyResult.toDomain(): ModifyCityResult = when (this) {
 
 fun CityEntityGetResult.toDomain(): CityGetResult = when (this) {
     is CityEntityGetResult.Success -> CityGetResult.Success(
-        this.itemFlow.map {
-            it.toCity()
+        this.itemFlow.map { city ->
+            city.toCity()
         }
     )
     is CityEntityGetResult.Failure -> CityGetResult.Failure

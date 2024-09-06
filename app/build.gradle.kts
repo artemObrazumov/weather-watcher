@@ -68,6 +68,9 @@ dependencies {
     //noinspection KaptUsageInsteadOfKsp
     kapt(libs.room.compiler)
 
+    // Retrofit
+    implementation(libs.retrofit)
+
     // Dagger-Hilt
     implementation(libs.dagger.hilt)
     kapt(libs.dagger.hilt.compiler)
