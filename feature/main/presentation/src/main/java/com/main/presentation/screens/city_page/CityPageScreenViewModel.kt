@@ -18,6 +18,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -58,8 +59,8 @@ class CityPageScreenViewModel @AssistedInject constructor(
             updateStateWithNewStates()
 
             val result = getWeatherUseCase.invoke(
-                latitude = cityInfo?.x ?: 0.0,
-                longitude = cityInfo?.y ?: 0.0
+                latitude = cityInfo?.latitude ?: 0.0,
+                longitude = cityInfo?.longitude ?: 0.0
             )
             when (result) {
                 is GetWeatherResult.Success -> {
@@ -84,7 +85,7 @@ class CityPageScreenViewModel @AssistedInject constructor(
             }
             is CityGetResult.Success -> {
                 runBlocking {
-                    cityInfo = result.cityFlow.first()
+                    cityInfo = result.cityFlow.firstOrNull()
                 }
             }
         }

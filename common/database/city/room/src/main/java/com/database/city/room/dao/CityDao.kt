@@ -1,6 +1,7 @@
 package com.database.city.room.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
@@ -28,4 +29,7 @@ interface CityDao {
     suspend fun updateCity(
         city: CityEntity
     ): Int
+
+    @Query("DELETE FROM ${CityEntity.TABLE} WHERE ${CityEntity.ID} = :cityId")
+    suspend fun deleteCity(cityId: Int)
 }

@@ -24,4 +24,8 @@ class CityRepositoryImpl @Inject constructor(
 
     override suspend fun getCity(cityId: Int): CityGetResult =
         cityLocalRepository.getCityById(cityId).toDomain()
+
+    override suspend fun deleteCity(cityId: Int) {
+        cityLocalRepository.deleteCity(cityId)
+    }
 }

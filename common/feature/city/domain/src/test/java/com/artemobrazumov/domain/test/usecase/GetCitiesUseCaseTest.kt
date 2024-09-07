@@ -6,7 +6,6 @@ import com.city.domain.repository.CityRepository
 import com.city.domain.usecase.GetCitiesUseCase
 import io.mockk.coEvery
 import io.mockk.mockk
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert
@@ -53,9 +52,9 @@ class GetCitiesUseCaseTest {
 
         val expectedCitiesResult = flowOf(
             listOf(
-                City(id = 0, city = "Moscow"),
-                City(id = 0, city = "Novosibirsk"),
-                City(id = 0, city = "Yekaterinburg")
+                City(id = 0, name = "Moscow"),
+                City(id = 0, name = "Novosibirsk"),
+                City(id = 0, name = "Yekaterinburg")
             )
         )
 

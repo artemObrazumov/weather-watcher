@@ -12,4 +12,5 @@ interface CityLocalRepository {
     suspend fun upsertCity(city: City): CitiesUpsertResult
     suspend fun modifyCity(city: City): CitiesModifyResult
     suspend fun getCityById(cityId: Int): CityEntityGetResult
+    suspend fun deleteCity(cityId: Int)
 }

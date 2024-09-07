@@ -12,16 +12,16 @@ data class CityEntity(
     val id: Int? = null,
     @ColumnInfo(name = CITY)
     val city: String,
-    @ColumnInfo(name = X)
-    val x: Double,
-    @ColumnInfo(name = Y)
-    val y: Double,
+    @ColumnInfo(name = LATITUDE)
+    val latitude: Double,
+    @ColumnInfo(name = LONGITUDE)
+    val longitude: Double,
 ) {
     companion object {
         const val TABLE = "city_table"
         const val ID = "id"
         const val CITY = "city"
-        const val X = "x"
-        const val Y = "y"
+        const val LATITUDE = "latitude"
+        const val LONGITUDE = "longitude"
     }
 }

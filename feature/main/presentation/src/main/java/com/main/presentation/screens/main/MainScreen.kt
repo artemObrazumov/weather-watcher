@@ -5,12 +5,14 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavController
-import com.main.presentation.navigation.CityEditorScreen
+import com.main.presentation.screens.city_editor.CityEditorScreen
+import com.main.presentation.screens.city_info.CityInfoScreen
 import com.main.presentation.screens.main.components.MainScreenContent
 import com.main.presentation.screens.main.state_hoisting.MainScreenEffect
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.serialization.Serializable
 import kotlin.coroutines.EmptyCoroutineContext
 
 @Composable
@@ -26,6 +28,9 @@ fun MainScreen(
                 is MainScreenEffect.NavigateToAddNewCity -> {
                     navController.navigate(CityEditorScreen(-1))
                 }
+                is MainScreenEffect.NavigateToCityDetails -> {
+                    navController.navigate(CityInfoScreen(effect.cityId))
+                }
             }
         }.flowOn(EmptyCoroutineContext).launchIn(this)
     }
@@ -35,3 +40,6 @@ fun MainScreen(
         onAction = viewModel::onAction
     )
 }
+
+@Serializable
+object MainScreen

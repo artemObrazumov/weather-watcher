@@ -65,6 +65,11 @@ class MainScreenViewModel @Inject constructor(
                     }
                 }
             }
+            is MainScreenAction.OpenDetails -> {
+                viewModelScope.launch(Dispatchers.IO) {
+                    updateEffect(MainScreenEffect.NavigateToCityDetails(action.id))
+                }
+            }
         }
     }
 

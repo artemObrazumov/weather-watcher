@@ -57,7 +57,8 @@ fun CityItem(
     city: String = String(),
     selected: Boolean = false,
     isNewItemPlaceholder: Boolean = false,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
+    onDetailsClick: () -> Unit = {}
 ) {
     Box(
         modifier = modifier
@@ -82,7 +83,8 @@ fun CityItem(
         } else {
             CityItemContent(
                 city = city,
-                selected = selected
+                selected = selected,
+                onDetailsClick = onDetailsClick
             )
         }
     }
@@ -92,6 +94,7 @@ fun CityItem(
 fun CityItemContent(
     city: String,
     selected: Boolean = false,
+    onDetailsClick: () -> Unit
 ) {
     Row {
         Image(
@@ -125,7 +128,9 @@ fun CityItemContent(
         ) {
             Image(
                 Icons.Default.Settings,
-                modifier = Modifier.rotate(rotation),
+                modifier = Modifier
+                    .rotate(rotation)
+                    .clickable { onDetailsClick() },
                 colorFilter = ColorFilter.tint(Color.White),
                 contentDescription = null,
             )

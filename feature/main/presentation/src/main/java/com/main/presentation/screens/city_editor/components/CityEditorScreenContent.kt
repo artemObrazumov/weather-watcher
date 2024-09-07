@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -105,21 +104,21 @@ fun CityEditorScreenContent(
                 }
                 Row {
                     OutlinedTextField(
-                        value = state.cityXState.text,
+                        value = state.cityLatitudeState.text,
                         label = {
-                            Text(text = "X")
+                            Text(text = "Ширина")
                         },
-                        isError = state.cityXState.errorMessage != null,
+                        isError = state.cityLatitudeState.errorMessage != null,
                         supportingText = {
-                            if (state.cityXState.errorMessage != null) {
+                            if (state.cityLatitudeState.errorMessage != null) {
                                 Text(
-                                    text = state.cityXState.errorMessage ?: ""
+                                    text = state.cityLatitudeState.errorMessage ?: ""
                                 )
                             }
                         },
                         modifier = Modifier
                             .weight(1f),
-                        onValueChange = { onAction(CityEditorScreenAction.OnCityXUpdated(it)) },
+                        onValueChange = { onAction(CityEditorScreenAction.OnCityLatitudeUpdated(it)) },
                         keyboardOptions = KeyboardOptions(
                             imeAction = ImeAction.Next,
                             keyboardType = KeyboardType.Decimal
@@ -127,21 +126,21 @@ fun CityEditorScreenContent(
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     OutlinedTextField(
-                        value = state.cityYState.text,
+                        value = state.cityLongitudeState.text,
                         label = {
-                            Text(text = "Y")
+                            Text(text = "Долгота")
                         },
-                        isError = state.cityYState.errorMessage != null,
+                        isError = state.cityLongitudeState.errorMessage != null,
                         supportingText = {
-                            if (state.cityYState.errorMessage != null) {
+                            if (state.cityLongitudeState.errorMessage != null) {
                                 Text(
-                                    text = state.cityYState.errorMessage ?: ""
+                                    text = state.cityLongitudeState.errorMessage ?: ""
                                 )
                             }
                         },
                         modifier = Modifier
                             .weight(1f),
-                        onValueChange = { onAction(CityEditorScreenAction.OnCityYUpdated(it)) },
+                        onValueChange = { onAction(CityEditorScreenAction.OnCityLongitudeUpdated(it)) },
                         keyboardOptions = KeyboardOptions(
                             imeAction = ImeAction.Done,
                             keyboardType = KeyboardType.Decimal
@@ -149,6 +148,7 @@ fun CityEditorScreenContent(
                     )
                 }
                 Button(
+                    modifier = Modifier.fillMaxWidth(),
                     onClick = { onAction(CityEditorScreenAction.OnCitySaved) }
                 ) {
                     Text(text = "Сохранить город")

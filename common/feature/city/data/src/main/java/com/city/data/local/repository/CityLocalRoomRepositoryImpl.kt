@@ -19,6 +19,7 @@ class CityLocalRoomRepositoryImpl @Inject constructor(
                 cityDao.getCities()
             )
         } catch (e: Exception) {
+            e.printStackTrace()
             CitiesEntityGetResult.Failure
         }
     }
@@ -29,6 +30,7 @@ class CityLocalRoomRepositoryImpl @Inject constructor(
                 cityDao.upsertCity(city.toCityEntity()).toInt()
             )
         } catch (e: Exception) {
+            e.printStackTrace()
             CitiesUpsertResult.Failure
         }
     }
@@ -39,6 +41,7 @@ class CityLocalRoomRepositoryImpl @Inject constructor(
                 cityDao.updateCity(city.toCityEntity()).toLong()
             )
         } catch (e: Exception) {
+            e.printStackTrace()
             CitiesModifyResult.Failure
         }
     }
@@ -49,7 +52,16 @@ class CityLocalRoomRepositoryImpl @Inject constructor(
                 cityDao.getCityById(cityId)
             )
         } catch (e: Exception) {
+            e.printStackTrace()
             CityEntityGetResult.Failure
+        }
+    }
+
+    override suspend fun deleteCity(cityId: Int) {
+        try {
+            cityDao.deleteCity(cityId)
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 }

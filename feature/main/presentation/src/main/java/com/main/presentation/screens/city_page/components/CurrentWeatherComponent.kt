@@ -5,6 +5,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.common.ui.components.loading.LoadingScreen
 import com.common.ui.components.weather.WeatherWidget
 import com.common.ui.components.weather.utils.toWeatherUI
 import com.main.presentation.screens.city_page.state_hoisting.WeatherState
@@ -18,7 +19,7 @@ fun CurrentWeatherComponent(
 
     when(state) {
         is WeatherState.Loading -> {
-            CircularProgressIndicator()
+            LoadingScreen()
         }
         is WeatherState.Error -> {
             Text(text = state.errorMessage)

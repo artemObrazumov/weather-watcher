@@ -31,8 +31,8 @@ class CityEditorScreenViewModel @AssistedInject constructor(
 
     private val isAddingNewCity = cityId == -1
     private var cityNameState = TextFieldState()
-    private var cityXState = TextFieldState()
-    private var cityYState = TextFieldState()
+    private var cityLatitudeState = TextFieldState()
+    private var cityLongitudeState = TextFieldState()
     private var isLoading = false
     private var errorMessage: String? = null
 
@@ -42,8 +42,8 @@ class CityEditorScreenViewModel @AssistedInject constructor(
             SharingStarted.Eagerly,
             CityEditorScreenState(
                 cityNameState = cityNameState,
-                cityXState = cityXState,
-                cityYState = cityYState,
+                cityLatitudeState = cityLatitudeState,
+                cityLongitudeState = cityLongitudeState,
                 isAddingNewCity = isAddingNewCity,
                 isLoading = isLoading,
                 errorMessage = errorMessage
@@ -65,9 +65,9 @@ class CityEditorScreenViewModel @AssistedInject constructor(
 
                     is CityGetResult.Success -> {
                         result.cityFlow.collect { city ->
-                            cityNameState = cityNameState.copy(text = city.city)
-                            cityXState = cityXState.copy(text = city.x.toString())
-                            cityYState = cityYState.copy(text = city.y.toString())
+                            cityNameState = cityNameState.copy(text = city.name)
+                            cityLatitudeState = cityLatitudeState.copy(text = city.latitude.toString())
+                            cityLongitudeState = cityLongitudeState.copy(text = city.longitude.toString())
                             updateStateWithNewStates()
                         }
                         isLoading = false
@@ -88,12 +88,12 @@ class CityEditorScreenViewModel @AssistedInject constructor(
                     cityNameState = cityNameState.copy(text = action.cityName)
                 }
 
-                is CityEditorScreenAction.OnCityXUpdated -> {
-                    cityXState = cityXState.copy(text = action.x)
+                is CityEditorScreenAction.OnCityLatitudeUpdated -> {
+                    cityLatitudeState = cityLatitudeState.copy(text = action.x)
                 }
 
-                is CityEditorScreenAction.OnCityYUpdated -> {
-                    cityYState = cityYState.copy(text = action.y)
+                is CityEditorScreenAction.OnCityLongitudeUpdated -> {
+                    cityLongitudeState = cityLongitudeState.copy(text = action.y)
                 }
 
                 is CityEditorScreenAction.OnMapOpened -> {
@@ -113,9 +113,9 @@ class CityEditorScreenViewModel @AssistedInject constructor(
             viewModelScope.launch(Dispatchers.IO) {
                 val city = City(
                     id = if (cityId == -1) null else cityId,
-                    city = cityNameState.text,
-                    x = cityXState.text.toDouble(),
-                    y = cityYState.text.toDouble(),
+                    name = cityNameState.text,
+                    latitude = cityLatitudeState.text.toDouble(),
+                    longitude = cityLongitudeState.text.toDouble(),
                 )
                 isLoading = true
                 updateStateWithNewStates()
@@ -142,17 +142,17 @@ class CityEditorScreenViewModel @AssistedInject constructor(
         }
 
         try {
-            cityXState.text.toDouble()
+            cityLatitudeState.text.toDouble()
         } catch (_: Exception) {
             result = false
-            cityXState = cityXState.copy(errorMessage = "Неправильный формат координат")
+            cityLatitudeState = cityLatitudeState.copy(errorMessage = "Неправильный формат координат")
         }
 
         try {
-            cityYState.text.toDouble()
+            cityLongitudeState.text.toDouble()
         } catch (_: Exception) {
             result = false
-            cityYState = cityYState.copy(errorMessage = "Неправильный формат координат")
+            cityLongitudeState = cityLongitudeState.copy(errorMessage = "Неправильный формат координат")
         }
         return result
     }
@@ -161,8 +161,8 @@ class CityEditorScreenViewModel @AssistedInject constructor(
         updateState(
             CityEditorScreenState(
                 cityNameState = cityNameState,
-                cityXState = cityXState,
-                cityYState = cityYState,
+                cityLatitudeState = cityLatitudeState,
+                cityLongitudeState = cityLongitudeState,
                 isAddingNewCity = isAddingNewCity,
                 isLoading = isLoading,
                 errorMessage = errorMessage

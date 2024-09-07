@@ -45,6 +45,7 @@ import androidx.compose.ui.unit.dp
 import com.artemobrazumov.ui.R
 import com.common.ui.components.weather.utils.toWeatherUI
 import com.common.ui.theme.LocalPaddings
+import com.common.ui.theme.Purple80
 import com.common.ui.theme.WeatherWatcherPaddings
 import com.common.ui.theme.WeatherWatcherTheme
 import com.weather.domain.models.weather.Weather
@@ -58,11 +59,7 @@ fun WeatherWidget(
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(8.dp))
-            .background(
-                brush = Brush.linearGradient(
-                    listOf(Color.Magenta, Color.Blue)
-                )
-            )
+            .background(Purple80)
             .padding(WeatherWatcherTheme.paddings.medium)
             .fillMaxWidth()
     ) {
@@ -74,6 +71,7 @@ fun WeatherWidget(
             label = "arrow"
         )
         Column(modifier = Modifier.padding(bottom = WeatherWatcherTheme.paddings.medium)) {
+            Spacer(modifier = Modifier.height(WeatherWatcherTheme.paddings.medium))
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {

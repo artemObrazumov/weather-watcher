@@ -16,6 +16,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.common.ui.components.city.CityItemRow
+import com.common.ui.components.loading.LoadingScreen
 import com.common.ui.theme.WeatherWatcherTheme
 import com.main.presentation.screens.city_page.state_hoisting.WeatherState
 import com.main.presentation.screens.main.state_hoisting.MainScreenAction
@@ -47,10 +48,12 @@ fun MainScreenContent(
                     }
 
                     CityItemRow(
+                        modifier = Modifier.padding(top = WeatherWatcherTheme.paddings.medium),
                         currentPage = state.currentPage,
                         cityRowItems = cities,
                         onItemClick = { onAction(MainScreenAction.OpenTab(it)) },
-                        onNewItemClick = { onAction(MainScreenAction.AddNewCity) }
+                        onNewItemClick = { onAction(MainScreenAction.AddNewCity) },
+                        onDetailsClick = { onAction(MainScreenAction.OpenDetails(it)) }
                     )
 
                     Spacer(modifier = Modifier.height(WeatherWatcherTheme.paddings.medium))
@@ -70,7 +73,9 @@ fun MainScreenContent(
                     }
                 }
 
-                is MainScreenState.Loading -> {}
+                is MainScreenState.Loading -> {
+                    LoadingScreen()
+                }
             }
         }
     }
