@@ -28,8 +28,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.common.ui.theme.WeatherWatcherTheme
 import com.common.weatherwatcher.navigation.AppNavGraph
+import com.main.presentation.work.CityMonitoringWorker
 import com.weatherwatcher.navigation.NavigationItemApi
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -43,6 +46,12 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val saveLogsWorker = OneTimeWorkRequestBuilder<CityMonitoringWorker>().build()
+        val workManager = WorkManager.getInstance(this)
+//        workManager.pruneWork()
+//        workManager.enqueue(saveLogsWorker)
+//        workManager.getWorkInfoById(saveLogsWorker.id)
 
         setContent {
             WeatherWatcherTheme {

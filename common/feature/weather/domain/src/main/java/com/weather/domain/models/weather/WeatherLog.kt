@@ -3,7 +3,8 @@ package com.weather.domain.models.weather
 import java.time.LocalDateTime
 
 data class WeatherLog(
-    val id: Long,
+    val id: Int?,
+    val cityId: Int,
     val temperature: Int,
     val temperatureFeels: Int,
     val temperatureMin: Int,

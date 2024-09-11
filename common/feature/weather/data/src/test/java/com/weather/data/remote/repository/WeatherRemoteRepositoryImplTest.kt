@@ -20,10 +20,8 @@ class WeatherRemoteRepositoryImplTest {
     @Test
     fun `should return failure on exception`() = runTest {
         val mockWeatherNetworkService = mockk<WeatherNetworkService>()
-        val mockLocationManager = mockk<LocationManager>()
         val weatherRemoteRepository = WeatherRemoteRepositoryImpl(
-            weatherNetworkService = mockWeatherNetworkService,
-            locationManager = mockLocationManager
+            weatherNetworkService = mockWeatherNetworkService
         )
 
         coEvery {
@@ -39,10 +37,8 @@ class WeatherRemoteRepositoryImplTest {
     @Test
     fun `should return expected weather result`() = runTest {
         val mockWeatherNetworkService = mockk<WeatherNetworkService>()
-        val mockLocationManager = mockk<LocationManager>()
         val weatherRemoteRepository = WeatherRemoteRepositoryImpl(
-            weatherNetworkService = mockWeatherNetworkService,
-            locationManager = mockLocationManager
+            weatherNetworkService = mockWeatherNetworkService
         )
 
         val expectedResult = RemoteWeather(

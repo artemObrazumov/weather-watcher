@@ -18,6 +18,7 @@ fun CityPagerPage(
             creationCallback = { factory -> factory.create(cityId) }
         )
     CityPageScreen(
-        viewModel = viewModel
+        viewModel = viewModel,
+        modifier = modifier
     )
 }

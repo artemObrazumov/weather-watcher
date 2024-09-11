@@ -53,7 +53,7 @@ class CityLocalRoomRepositoryImpl @Inject constructor(
             )
         } catch (e: Exception) {
             e.printStackTrace()
-            CityEntityGetResult.Failure
+            CityEntityGetResult.Failure("database error")
         }
     }
 

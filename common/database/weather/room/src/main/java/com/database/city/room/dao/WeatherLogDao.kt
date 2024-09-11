@@ -1,21 +1,24 @@
-package com.weather.data.local.db.dao
+package com.database.city.room.dao
 
-import androidx.room.Insert
+import androidx.room.Dao
 import androidx.room.Query
-import com.weather.data.local.db.entity.WeatherLogEntity
+import androidx.room.Upsert
+import com.database.city.room.entity.WeatherLogEntity
+import kotlinx.coroutines.flow.Flow
 import java.time.LocalDateTime
 
+@Dao
 interface WeatherLogDao {
 
-    @Insert
-    suspend fun insertWeatherLog(
+    @Upsert
+    suspend fun upsertWeatherLog(
         weatherLog: WeatherLogEntity
     ): Long
 
     @Query("SELECT * FROM ${WeatherLogEntity.TABLE} WHERE ${WeatherLogEntity.CITY} = :city AND ${WeatherLogEntity.TIME} BETWEEN :fromTime AND :toTime")
-    suspend fun loadWeatherLog(
+    fun getWeatherLog(
         fromTime: LocalDateTime,
         toTime: LocalDateTime,
         city: String
-    ): List<WeatherLogEntity>
+    ): Flow<List<WeatherLogEntity>>
 }

@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 sealed class CityGetResult {
 
     data class Success(val cityFlow: Flow<City>): CityGetResult()
-    data object Failure: CityGetResult()
+    data class Failure(val errorMessage: String): CityGetResult()
 }

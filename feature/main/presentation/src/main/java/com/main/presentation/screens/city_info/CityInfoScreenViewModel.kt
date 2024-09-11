@@ -9,6 +9,7 @@ import com.main.presentation.screens.city_info.state_hoisting.CityInfoScreenActi
 import com.main.presentation.screens.city_info.state_hoisting.CityInfoScreenEffect
 import com.main.presentation.screens.city_info.state_hoisting.CityInfoScreenState
 import com.main.presentation.screens.city_info.state_hoisting.CityInfoState
+import com.main.presentation.screens.city_info.state_hoisting.CityMonitoringState
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -27,7 +28,9 @@ class CityInfoScreenViewModel @AssistedInject constructor(
 ): StatefulViewModel<CityInfoScreenState, CityInfoScreenEffect, CityInfoScreenAction>() {
 
     private var cityInfoState: CityInfoState = CityInfoState.Loading
+    private var cityMonitoringState: CityMonitoringState = CityMonitoringState.Loading
     private var isProcessingOperation = false
+    private var activeTab = 0
 
     val state = _state.receiveAsFlow()
         .stateIn(
@@ -35,7 +38,9 @@ class CityInfoScreenViewModel @AssistedInject constructor(
             SharingStarted.Eagerly,
             CityInfoScreenState(
                 cityInfoState = cityInfoState,
-                isProcessingOperation = isProcessingOperation
+                cityMonitoringState = cityMonitoringState,
+                isProcessingOperation = isProcessingOperation,
+                activeTab = activeTab
             )
         )
 
@@ -75,7 +80,9 @@ class CityInfoScreenViewModel @AssistedInject constructor(
         updateState(
             CityInfoScreenState(
                 cityInfoState = cityInfoState,
-                isProcessingOperation = isProcessingOperation
+                cityMonitoringState = cityMonitoringState,
+                isProcessingOperation = isProcessingOperation,
+                activeTab = activeTab
             )
         )
     }
@@ -88,6 +95,12 @@ class CityInfoScreenViewModel @AssistedInject constructor(
                 }
             }
             is CityInfoScreenAction.DeleteCity -> { deleteCity() }
+            is CityInfoScreenAction.OpenTab -> {
+                viewModelScope.launch {
+                    activeTab = action.index
+                    updateStateWithNewStates()
+                }
+            }
         }
     }
 

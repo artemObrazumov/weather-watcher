@@ -24,9 +24,12 @@ navigationCompose = "2.8.0-beta02"
 navigationRuntimeKtx = "2.7.7"
 navigationCommonKtx = "2.7.7"
 hiltNavCompose = "1.2.0"
+workRuntimeKtx = "2.9.1"
+androidxHilt = "1.2.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "workRuntimeKtx" }
 javax-inject = { module = "javax.inject:javax.inject", version.ref = "javaxInject" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -51,6 +54,8 @@ retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = 
 kotlin-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinSerialization" }
 retrofit-kotlin-serialization-converter = { group = "com.squareup.retrofit2", name = "converter-kotlinx-serialization", version.ref = "retrofit" }
 dagger-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-work = { group = "androidx.hilt", name = "hilt-work", version.ref = "androidxHilt" }
+hilt-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "androidxHilt" }
 dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
 hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavCompose" }
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }

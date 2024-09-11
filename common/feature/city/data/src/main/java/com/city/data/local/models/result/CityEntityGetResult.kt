@@ -5,6 +5,10 @@ import kotlinx.coroutines.flow.Flow
 
 sealed class CityEntityGetResult {
 
-    data class Success(val itemFlow: Flow<CityEntity>): CityEntityGetResult()
-    data object Failure: CityEntityGetResult()
+    data class Success(
+        val itemFlow: Flow<CityEntity>
+    ): CityEntityGetResult()
+    data class Failure(
+        val errorMessage: String
+    ): CityEntityGetResult()
 }

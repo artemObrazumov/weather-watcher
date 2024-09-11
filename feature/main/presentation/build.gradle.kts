@@ -66,8 +66,13 @@ dependencies {
 
     // Dagger-Hilt
     implementation(libs.dagger.hilt)
+    implementation(libs.hilt.work)
     kapt(libs.dagger.hilt.compiler)
+    kapt(libs.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
+
+    // Work Manager
+    implementation(libs.androidx.work.runtime.ktx)
 
     // Android
     implementation(libs.androidx.core.ktx)

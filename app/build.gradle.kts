@@ -73,9 +73,13 @@ dependencies {
 
     // Dagger-Hilt
     implementation(libs.dagger.hilt)
+    implementation(libs.hilt.work)
+    implementation(libs.hilt.navigation.compose)
     kapt(libs.dagger.hilt.compiler)
-    kapt("com.google.dagger:hilt-android-testing:2.46")
-    implementation("com.squareup:javapoet:1.13.0")
+    kapt(libs.hilt.compiler)
+
+    // Work Manager
+    implementation(libs.androidx.work.runtime.ktx)
 
     // Android
     implementation(libs.androidx.core.ktx)

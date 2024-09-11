@@ -43,6 +43,7 @@ dependencies {
     api(project(":common:network"))
 
     // Weather
+    api(project(":common:database:weather:room"))
     implementation(project(":common:feature:weather:domain"))
 
     // Dagger-Hilt

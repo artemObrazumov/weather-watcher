@@ -1,31 +1,35 @@
 package com.main.presentation.screens.city_info.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
-import androidx.compose.material3.ButtonDefaults
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
+import com.city.domain.models.City
 import com.common.ui.components.loading.LoadingScreen
-import com.common.ui.theme.Red40
+import com.common.ui.components.tabs.WeatherWatcherTab
 import com.common.ui.theme.WeatherWatcherTheme
 import com.main.presentation.screens.city_info.state_hoisting.CityInfoScreenAction
 import com.main.presentation.screens.city_info.state_hoisting.CityInfoScreenState
 import com.main.presentation.screens.city_info.state_hoisting.CityInfoState
+import com.main.presentation.screens.city_info.state_hoisting.CityMonitoringState
+import com.main.presentation.screens.main.state_hoisting.MainScreenAction
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -48,71 +52,101 @@ fun CityInfoScreenContent(
             )
         }
     ) { innerPadding ->
-        Box(modifier = modifier
-            .padding(innerPadding)
-            .padding(horizontal = WeatherWatcherTheme.paddings.medium)
-            .fillMaxSize()
+        Column(
+            modifier = modifier
+                .padding(innerPadding)
+                .fillMaxSize()
         ) {
-            when(state.cityInfoState) {
-                is CityInfoState.Loading -> {
-                    LoadingScreen()
-                }
-                is CityInfoState.Data -> {
-                    Column {
-                        Text(
-                            text = "Название",
-                            style = MaterialTheme.typography.titleMedium
+            Column(
+                modifier = Modifier.padding(horizontal = WeatherWatcherTheme.paddings.medium)
+            ) {
+                Row(
+                    modifier = Modifier
+                        .padding(
+                            top = WeatherWatcherTheme.paddings.medium,
+                            bottom = WeatherWatcherTheme.paddings.large
                         )
+                ) {
+                    WeatherWatcherTab(
+                        modifier = Modifier.weight(1f),
+                        selected = state.activeTab == 0,
+                        onClick = { onAction(CityInfoScreenAction.OpenTab(0)) }
+                    ) {
                         Text(
-                            text = state.cityInfoState.city.name,
-                            style = MaterialTheme.typography.bodyLarge
+                            text = "Город",
+                            style = MaterialTheme.typography.labelMedium,
                         )
-                        Spacer(modifier = Modifier.height(WeatherWatcherTheme.paddings.medium))
-                        Row {
-                            Column(
-                                modifier = Modifier.weight(1f)
-                            ) {
-                                Text(
-                                    text = "Ширина",
-                                    style = MaterialTheme.typography.titleMedium
-                                )
-                                Text(
-                                    text = state.cityInfoState.city.latitude.toString(),
-                                    style = MaterialTheme.typography.bodyLarge
-                                )
-                            }
-                            Spacer(modifier = Modifier.width(WeatherWatcherTheme.paddings.extraLarge))
-                            Column(
-                                modifier = Modifier.weight(1f)
-                            ) {
-                                Text(
-                                    text = "Долгота",
-                                    style = MaterialTheme.typography.titleMedium
-                                )
-                                Text(
-                                    text = state.cityInfoState.city.longitude.toString(),
-                                    style = MaterialTheme.typography.bodyLarge
-                                )
-                            }
-                        }
-                        Spacer(modifier = Modifier.height(WeatherWatcherTheme.paddings.extraLarge))
-                        Button(
-                            modifier = Modifier.fillMaxWidth(),
-                            onClick = { onAction(CityInfoScreenAction.EditCity) }
-                        ) {
-                            Text(text = "Редактировать город")
-                        }
-                        Button(
-                            modifier = Modifier.fillMaxWidth(),
-                            colors = ButtonDefaults.buttonColors().copy(containerColor = Red40),
-                            onClick = { onAction(CityInfoScreenAction.DeleteCity) }
-                        ) {
-                            Text(text = "Удалить город")
-                        }
+                    }
+                    Spacer(modifier = Modifier.width(WeatherWatcherTheme.paddings.medium))
+                    WeatherWatcherTab(
+                        modifier = Modifier.weight(1f),
+                        selected = state.activeTab == 1,
+                        onClick = { onAction(CityInfoScreenAction.OpenTab(1)) }
+                    ) {
+                        Text(
+                            text = "Мониторинг",
+                            style = MaterialTheme.typography.labelMedium
+                        )
                     }
                 }
-                is CityInfoState.Error -> {}
+            }
+            val pagerState = rememberPagerState(
+                initialPage = state.activeTab,
+                pageCount = { 2 }
+            )
+            LaunchedEffect(state.activeTab) {
+                pagerState.animateScrollToPage(state.activeTab)
+            }
+            LaunchedEffect(pagerState.currentPage) {
+                onAction(CityInfoScreenAction.OpenTab(pagerState.currentPage))
+            }
+
+            HorizontalPager(
+                state = pagerState,
+                modifier = Modifier.weight(1f),
+                contentPadding = PaddingValues(
+                    WeatherWatcherTheme.paddings.medium
+                ),
+                pageSpacing = WeatherWatcherTheme.paddings.medium
+            ) {
+                when (it) {
+                    0 -> CityInfoPage(
+                        state = state.cityInfoState,
+                        modifier = modifier,
+                        onAction = onAction
+                    )
+
+                    1 -> CityMonitoringPage(
+                        state = state.cityMonitoringState,
+                        modifier = modifier,
+                        onAction = onAction
+                    )
+                }
             }
         }
+    }
+}
+
+@Preview(showSystemUi = true, showBackground = true)
+@Composable
+fun CityInfoScreenContentPreview() {
+    WeatherWatcherTheme {
+        val state = CityInfoScreenState(
+            cityInfoState = CityInfoState.Data(
+                city = City(
+                    id = 0,
+                    name = "test",
+                    latitude = 0.0,
+                    longitude = 0.0,
+                )
+            ),
+            cityMonitoringState = CityMonitoringState.Loading,
+            isProcessingOperation = false,
+            activeTab = 0
+        )
+        CityInfoScreenContent(
+            state = state,
+            onAction = {}
+        )
     }
 }

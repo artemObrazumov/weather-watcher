@@ -14,6 +14,8 @@
             <option value="$PROJECT_DIR$/common/database" />
             <option value="$PROJECT_DIR$/common/database/city" />
             <option value="$PROJECT_DIR$/common/database/city/room" />
+            <option value="$PROJECT_DIR$/common/database/weather" />
+            <option value="$PROJECT_DIR$/common/database/weather/room" />
             <option value="$PROJECT_DIR$/common/feature" />
             <option value="$PROJECT_DIR$/common/feature/city" />
             <option value="$PROJECT_DIR$/common/feature/city/data" />

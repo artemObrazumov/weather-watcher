@@ -4,7 +4,9 @@ import com.city.domain.models.City
 
 data class CityInfoScreenState(
     val cityInfoState: CityInfoState,
-    val isProcessingOperation: Boolean
+    val cityMonitoringState: CityMonitoringState,
+    val isProcessingOperation: Boolean,
+    val activeTab: Int
 )
 
 sealed class CityInfoState {
@@ -15,4 +17,14 @@ sealed class CityInfoState {
     data class Data(
         val city: City
     ): CityInfoState()
+}
+
+sealed class CityMonitoringState {
+    data object Loading: CityMonitoringState()
+    data class Error(
+        val errorMessage: String
+    ): CityMonitoringState()
+    data class Data(
+        val data: Any
+    ): CityMonitoringState()
 }

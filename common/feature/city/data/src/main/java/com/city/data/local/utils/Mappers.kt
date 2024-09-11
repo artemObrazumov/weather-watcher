@@ -54,5 +54,7 @@ fun CityEntityGetResult.toDomain(): CityGetResult = when (this) {
             cityEntity?.toCity()
         }
     )
-    is CityEntityGetResult.Failure -> CityGetResult.Failure
+    is CityEntityGetResult.Failure -> CityGetResult.Failure(
+        errorMessage = this.errorMessage
+    )
 }
